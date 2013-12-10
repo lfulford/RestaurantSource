@@ -18,9 +18,8 @@
   <!-- Itâ€™s available at the root of github.com/apigee/usergrid-javascript-sdk -->
   <script src="js/apigee.min.js"></script>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-  
       
-  <script src="js/my-restaurants.js"></script>
+  <script src="js/my-restaurants-geo.js"></script>
   
 
   
@@ -61,7 +60,7 @@
           </h3>
       </div>
       <div data-role="content">
-          <form action="">
+          <form id="add-form" action="">
               <div data-role="fieldcontain" data-controltype="textinput">
                   <label for="name-field">
                       Name
@@ -70,18 +69,54 @@
               </div>
               <div data-role="fieldcontain" data-controltype="textinput">
                   <label for="city-field">
-                      City
+                      Address
                   </label>
                   <input name="" id="city-field" placeholder="" value="" type="text">
               </div>
-              <a id="cancel-button" data-role="button" data-inline="true" href="#home-page">
-                  Cancel
+              <a id="find-button" data-role="button" data-inline="true" data-theme="e"
+              href="#add-dialog" data-icon="search" data-iconpos="right">
+                  Find
               </a>
               <a id="submit-button" data-role="button" data-inline="true" data-theme="b"
-              href="#home-page">
+              href="#home-page" data-icon="plus" data-iconpos="right">
                   Create
               </a>
           </form>
+          <div id="add-map-canvas" class="google-map" style="width: 250px; height: 200px; margin-left: auto; margin-right: auto">
+          </div>
+          
+          <!--
+          <script type="text/javascript">
+                  window.CodiqaControls && window.CodiqaControls.register('googlemaps', 'add-map-canvas', {
+              ready: function(control) {
+  
+                  control.options = {
+                      zoom: 14,
+                      mapTypeId: google.maps.MapTypeId.ROADMAP
+                  };
+  
+                  control.el = document.getElementById(control._id);
+                  control.map = new google.maps.Map(control.el, control.options);
+  
+                  var geocoder = new google.maps.Geocoder();
+                  geocoder.geocode({
+                      'address': ''
+                  }, function(results, status) {
+                      if (status == google.maps.GeocoderStatus.OK) {
+  
+                          var marker = new google.maps.Marker({
+                              map: control.map,
+                              position: results[0].geometry.location
+                          });
+                          control.center = results[0].geometry.location;
+                          control.map.setCenter(control.center);
+                      }
+                  });
+  
+              }
+          });
+          </script>
+          -->
       </div>
   </div>
   <div data-role="page" data-control-title="ViewRestaurantDialog" id="view-dialog">
@@ -109,6 +144,5 @@
           </a>
       </div>
   </div>
-  <div id="map-canvas" style="height:0; width:0"></div>
 </body>
 </html>
